@@ -120,5 +120,6 @@ type RecvSuiteAuth struct {
 	SuiteId    string
 	InfoType   string
 	TimeStamp  float64
+	AuthCode   string
 	AuthCorpId string
 }
