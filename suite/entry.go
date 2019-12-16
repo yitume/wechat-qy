@@ -1,5 +1,9 @@
 package suite
 
+import (
+	"github.com/heroicyang/wechat-qy/api"
+)
+
 type preAuthCodeInfo struct {
 	Code      string `json:"pre_auth_code"`
 	ExpiresIn int64  `json:"expires_in"`
@@ -122,4 +126,13 @@ type RecvSuiteAuth struct {
 	TimeStamp  float64
 	AuthCode   string
 	AuthCorpId string
+}
+
+// RecvSuiteUser 用于记录应用套件用户变更被动响应结果
+type RecvSuiteUser struct {
+	SuiteId    string
+	InfoType   string
+	TimeStamp  float64
+	AuthCorpId string
+	api.User
 }

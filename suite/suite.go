@@ -126,6 +126,8 @@ func (s *Suite) Parse(body []byte, signature, timestamp, nonce string) (interfac
 		data = &RecvSuiteTicket{}
 	case "create_auth", "change_auth", "cancel_auth":
 		data = &RecvSuiteAuth{}
+	case "create_user", "delete_user", "update_user":
+		data = &RecvSuiteUser{}
 	default:
 		return nil, fmt.Errorf("unknown message type: %s", probeData.InfoType)
 	}
