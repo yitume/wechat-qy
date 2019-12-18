@@ -136,3 +136,14 @@ type RecvSuiteUser struct {
 	AuthCorpId string
 	api.User
 }
+
+// OAuth2UserInfo 为用户 OAuth2 验证登录后的简单信息
+type OAuth2User3rdInfo struct {
+	ErrCode    string `json:"errcode"`
+	ErrMsg     string `json:"errmsg"`
+	CorpID     string `json:"CoprId"`
+	UserID     string `json:"UserId"`
+	DeviceID   string `json:"DeviceId"`
+	UserTicket string `json:"user_ticket"`
+	ExpiresIn  string `json:"expires_in"`
+}

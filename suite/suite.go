@@ -12,14 +12,15 @@ import (
 
 // 应用套件相关操作的 API 地址
 const (
-	suiteTokenURI    = "https://qyapi.weixin.qq.com/cgi-bin/service/get_suite_token"
-	preAuthCodeURI   = "https://qyapi.weixin.qq.com/cgi-bin/service/get_pre_auth_code"
-	authURI          = "https://qy.weixin.qq.com/cgi-bin/loginpage"
-	permanentCodeURI = "https://qyapi.weixin.qq.com/cgi-bin/service/get_permanent_code"
-	authInfoURI      = "https://qyapi.weixin.qq.com/cgi-bin/service/get_auth_info"
-	getAgentURI      = "https://qyapi.weixin.qq.com/cgi-bin/service/get_agent"
-	setAgentURI      = "https://qyapi.weixin.qq.com/cgi-bin/service/set_agent"
-	corpTokenURI     = "https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token"
+	suiteTokenURI       = "https://qyapi.weixin.qq.com/cgi-bin/service/get_suite_token"
+	preAuthCodeURI      = "https://qyapi.weixin.qq.com/cgi-bin/service/get_pre_auth_code"
+	authURI             = "https://qy.weixin.qq.com/cgi-bin/loginpage"
+	permanentCodeURI    = "https://qyapi.weixin.qq.com/cgi-bin/service/get_permanent_code"
+	authInfoURI         = "https://qyapi.weixin.qq.com/cgi-bin/service/get_auth_info"
+	getAgentURI         = "https://qyapi.weixin.qq.com/cgi-bin/service/get_agent"
+	setAgentURI         = "https://qyapi.weixin.qq.com/cgi-bin/service/set_agent"
+	corpTokenURI        = "https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token"
+	oauth2GetUser3rdURI = "qyapi.weixin.qq.com/cgi-bin/service/getuserinfo3rd"
 )
 
 // Suite 结构体包含了应用套件的相关操作
@@ -374,6 +375,29 @@ func (s *Suite) fetchCorpToken(corpID, permanentCode string) (*corpTokenInfo, er
 
 	result := &corpTokenInfo{}
 	err = json.Unmarshal(body, result)
+
+	return result, err
+}
+
+// GetOAuth2User3rd 方法用于获取 OAuth2 方式验证登录后的用户信息
+func (s *Suite) GetOAuth2User3rd(code string) (OAuth2User3rdInfo, error) {
+	token, err := s.tokener.Token()
+	if err != nil {
+		return OAuth2User3rdInfo{}, err
+	}
+
+	qs := make(url.Values)
+	qs.Add("access_token", token)
+	qs.Add("code", code)
+
+	uri := oauth2GetUser3rdURI + "?" + qs.Encode()
+	body, err := s.client.GetJSON(uri)
+	if err != nil {
+		return OAuth2User3rdInfo{}, err
+	}
+
+	result := OAuth2User3rdInfo{}
+	err = json.Unmarshal(body, &result)
 
 	return result, err
 }
