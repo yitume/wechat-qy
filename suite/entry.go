@@ -39,10 +39,21 @@ type Agent struct {
 	IsReportEnter        int64  `json:"isreportenter,omitempty"`
 }
 
+type Privilege struct {
+	Level      int      `json:"level"`
+	AllowParty []int64  `json:"allow_party"`
+	AllowUser  []string `json:"allow_user"`
+	AllowTag   []int    `json:"allow_tag"`
+	ExtraParty []int    `json:"extra_party"`
+	ExtraUser  []string `json:"extra_user"`
+	ExtraTag   []int    `json:"extra_tag"`
+}
+
 type authorizedAgent struct {
 	Agent
-	AppID    int64    `json:"appid"`
-	APIGroup []string `json:"api_group"`
+	AppID     int64     `json:"appid"`
+	Privilege Privilege `json:"privilege"`
+	APIGroup  []string  `json:"api_group"`
 }
 
 type authorizedDepartment struct {
