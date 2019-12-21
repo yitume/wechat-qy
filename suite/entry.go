@@ -71,11 +71,18 @@ type AuthInfo struct {
 
 // PermanentCodeInfo 代表获取企业号永久授权码时的响应信息
 type PermanentCodeInfo struct {
-	AccessToken   string       `json:"access_token"`
-	ExpiresIn     int64        `json:"expires_in"`
-	PermanentCode string       `json:"permanent_code"`
-	AuthCorpInfo  *Corporation `json:"auth_corp_info"`
-	AuthInfo      *AuthInfo    `json:"auth_info"`
+	AccessToken   string        `json:"access_token"`
+	ExpiresIn     int64         `json:"expires_in"`
+	PermanentCode string        `json:"permanent_code"`
+	AuthCorpInfo  *Corporation  `json:"auth_corp_info"`
+	AuthInfo      *AuthInfo     `json:"auth_info"`
+	AuthUserInfo  *AuthUserInfo `json:"auth_user_info"`
+}
+
+type AuthUserInfo struct {
+	Userid string `json:"userid"`
+	Name   string `json:"name"`
+	Avatar string `json:"avatar"`
 }
 
 type operator struct {
