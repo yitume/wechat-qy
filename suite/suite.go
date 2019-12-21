@@ -20,7 +20,7 @@ const (
 	getAgentURI         = "https://qyapi.weixin.qq.com/cgi-bin/service/get_agent"
 	setAgentURI         = "https://qyapi.weixin.qq.com/cgi-bin/service/set_agent"
 	corpTokenURI        = "https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token"
-	oauth2GetUser3rdURI = "qyapi.weixin.qq.com/cgi-bin/service/getuserinfo3rd"
+	oauth2GetUser3rdURI = "https://qyapi.weixin.qq.com/cgi-bin/service/getuserinfo3rd"
 )
 
 // Suite 结构体包含了应用套件的相关操作
