@@ -380,10 +380,10 @@ func (s *Suite) fetchCorpToken(corpID, permanentCode string) (*corpTokenInfo, er
 }
 
 // GetOAuth2User3rd 方法用于获取 OAuth2 方式验证登录后的用户信息
-func (s *Suite) GetOAuth2User3rd(code string) (OAuth2User3rdInfo, error) {
+func (s *Suite) GetOAuth2User3rd(code string) (*OAuth2User3rdInfo, error) {
 	token, err := s.tokener.Token()
 	if err != nil {
-		return OAuth2User3rdInfo{}, err
+		return nil, err
 	}
 
 	qs := make(url.Values)
@@ -393,11 +393,11 @@ func (s *Suite) GetOAuth2User3rd(code string) (OAuth2User3rdInfo, error) {
 	uri := oauth2GetUser3rdURI + "?" + qs.Encode()
 	body, err := s.client.GetJSON(uri)
 	if err != nil {
-		return OAuth2User3rdInfo{}, err
+		return nil, err
 	}
 
-	result := OAuth2User3rdInfo{}
+	var result OAuth2User3rdInfo
 	err = json.Unmarshal(body, &result)
 
-	return result, err
+	return &result, err
 }

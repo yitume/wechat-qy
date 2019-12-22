@@ -159,7 +159,7 @@ type RecvSuiteUser struct {
 type OAuth2User3rdInfo struct {
 	ErrCode    int    `json:"errcode"`
 	ErrMsg     string `json:"errmsg"`
-	CorpID     string `json:"CoprId"`
+	CorpID     string `json:"CorpId"`
 	UserID     string `json:"UserId"`
 	DeviceID   string `json:"DeviceId"`
 	UserTicket string `json:"user_ticket"`
